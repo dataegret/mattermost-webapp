@@ -410,6 +410,7 @@ export default class Post extends React.PureComponent<Props, State> {
 
         let profilePic;
         const hideProfilePicture = this.hasSameRoot(this.props) && this.props.consecutivePostByUser && (!post.root_id && !hasReplies) && !fromBot;
+        const showTimeWithDate = !(this.hasSameRoot(this.props) && this.props.consecutivePostByUser || this.props.compactDisplay);
         if (!hideProfilePicture) {
             profilePic = (
                 <PostProfilePicture
@@ -443,6 +444,7 @@ export default class Post extends React.PureComponent<Props, State> {
                 colorizeUsernames={this.props.compactDisplay && this.props.colorizeUsernames}
                 isFirstReply={this.props.isFirstReply}
                 showTimeWithoutHover={!hideProfilePicture}
+                showTimeWithDate={showTimeWithDate}
                 hover={(this.state.hover || this.state.a11yActive || this.state.fileDropdownOpened) && !isBeingEdited}
                 isLastPost={this.props.isLastPost}
             />
