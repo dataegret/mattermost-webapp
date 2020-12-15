@@ -148,6 +148,9 @@ export default class PostBody extends React.PureComponent {
             postClass += ' post--edited';
         }
 
+        if (this.props.post.props.is_deleted)
+            postClass += ' post--deleted';
+
         let fileAttachmentHolder = null;
         if (
             ((post.file_ids && post.file_ids.length > 0) ||

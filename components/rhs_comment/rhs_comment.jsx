@@ -521,7 +521,10 @@ export default class RhsComment extends React.PureComponent {
             failedPostOptions = <FailedPostOptions post={this.props.post}/>;
         }
 
-        const postClass = PostUtils.isEdited(this.props.post) ? ' post--edited' : '';
+        let postClass = PostUtils.isEdited(this.props.post) ? ' post--edited' : '';
+
+        if (this.props.post.props.is_deleted)
+            postClass += ' post--deleted';
 
         let fileAttachment = null;
         if (post.file_ids && post.file_ids.length > 0) {
