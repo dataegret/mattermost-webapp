@@ -18,6 +18,7 @@ import PostHeaderCustomStatus from './post_header_custom_status';
 import './post_header.scss';
 
 export type Props = {
+    showTimeWithDate: boolean;
 
     /*
      * The post to render the header for
@@ -192,6 +193,7 @@ export default class PostHeader extends React.PureComponent<Props> {
                         compactDisplay={this.props.compactDisplay}
                         isFirstReply={this.props.isFirstReply}
                         showTimeWithoutHover={this.props.showTimeWithoutHover}
+                        showTimeWithDate={this.props.showTimeWithDate}
                         hover={this.props.hover}
                         isLastPost={this.props.isLastPost}
                     />

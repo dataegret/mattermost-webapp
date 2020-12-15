@@ -4672,7 +4672,7 @@
   "threading.threadMenu.unfollowMessage": "Unfollow message",
   "threading.threadMenu.unsave": "Unsave",
   "time_dropdown.choose_time": "Choose a time",
-  "timestamp.datetime": "{relativeOrDate} at {time}",
+  "timestamp.datetime": "{relativeOrDate}, {time}",
   "trial_benefits_modal.trial_just_started.buttons.close": "Close",
   "trial_benefits_modal.trial_just_started.buttons.setUp": "Set up system console",
   "trial_benefits.modal.complianceExportDescription": "Run daily compliance reports and export them to a variety of formats consumable by third-party integration tools such as Smarsh (Actiance).",

@@ -4451,7 +4451,7 @@
   "threading.threadMenu.unfollowMessage": "Отписаться от сообщения",
   "threading.threadMenu.unsave": "Убрать из сохраненных",
   "time_dropdown.choose_time": "Выберите время",
-  "timestamp.datetime": "{relativeOrDate} в {time}",
+  "timestamp.datetime": "{relativeOrDate}, {time}",
   "trial_benefits.modal.complianceExportDescription": "Создавайте ежедневные отчеты комплаенса и экспортируйте их в различные форматы, которые можно использовать с помощью сторонних инструментов интеграции, таких как Smarsh (Actiance).",
   "trial_benefits.modal.complianceExportTitle": "Запуск экспорта комплаенса",
   "trial_benefits.modal.guestAccessDescription": "Сотрудничайте с пользователями за пределами вашей организации, строго контролируя их доступ к каналам и участникам команды.",
