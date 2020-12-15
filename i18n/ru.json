@@ -5023,7 +5023,7 @@
   "three_days_left_trial.modal.viewPlans": "Посмотреть варианты тарифных планов",
   "three_days_left_trial_modal.learnMore": "Узнать больше",
   "time_dropdown.choose_time": "Выберите время",
-  "timestamp.datetime": "{relativeOrDate} в {time}",
+  "timestamp.datetime": "{relativeOrDate}, {time}",
   "trial_benefits.modal.ldapDescription": "Используйте группы AD/LDAP для организации и применения действий сразу к нескольким пользователям. Управляйте членством в командах и каналах, разрешениями и многим другим.",
   "trial_benefits.modal.ldapTitle": "Синхронизация групп Active Directory/LDAP",
   "trial_benefits.modal.onlyVisibleToAdmins": "Видно только админам",
