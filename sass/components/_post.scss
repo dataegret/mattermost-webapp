@@ -1499,6 +1499,10 @@
             gap: 4px;
         }
 
+        &.post--deleted, .post--deleted {
+            text-decoration: line-through !important;
+        }
+
         &.post--ephemeral {
             padding-right: 20px !important;
         }
