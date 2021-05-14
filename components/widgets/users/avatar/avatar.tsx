@@ -41,7 +41,7 @@ const Avatar = ({
             {...attrs}
             className={classes}
             tabIndex={0}
-            alt={`${username || 'user'} profile image`}
+            alt=''
             src={url}
         />
     );
