@@ -67,7 +67,7 @@ const Avatar = ({
             tabIndex={0}
             {...attrs}
             className={classes}
-            alt={`${username || 'user'} profile image`}
+            alt=''
             src={url}
             loading='lazy'
             onError={(e) => {
