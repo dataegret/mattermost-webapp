@@ -236,19 +236,19 @@ const ProductMenuList = (props: Props): JSX.Element | null => {
                             />
                         }
                     />
+                    <Menu.ItemExternalLink
+                        id='nativeAppLink'
+                        show={appDownloadLink && !UserAgent.isMobileApp()}
+                        url={makeUrlSafe(appDownloadLink)}
+                        text={formatMessage({id: 'navbar_dropdown.nativeApps', defaultMessage: 'Download Apps'})}
+                        icon={
+                            <Icon
+                                size={16}
+                                glyph={'download-outline'}
+                            />
+                        }
+                    />
                 </TeamPermissionGate>
-                <Menu.ItemExternalLink
-                    id='nativeAppLink'
-                    show={appDownloadLink && !UserAgent.isMobileApp()}
-                    url={makeUrlSafe(appDownloadLink)}
-                    text={formatMessage({id: 'navbar_dropdown.nativeApps', defaultMessage: 'Download Apps'})}
-                    icon={
-                        <Icon
-                            size={16}
-                            glyph={'download-outline'}
-                        />
-                    }
-                />
                 <Menu.ItemToggleModalRedux
                     id='about'
                     modalId={ModalIdentifiers.ABOUT}
