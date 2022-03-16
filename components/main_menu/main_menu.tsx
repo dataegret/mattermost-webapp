@@ -353,13 +353,18 @@ export class MainMenu extends React.PureComponent<Props> {
                         text={formatMessage({id: 'navbar_dropdown.report', defaultMessage: 'Report a Problem'})}
                         icon={<i className='fa fa-phone'/>}
                     />
-                    <Menu.ItemExternalLink
-                        id='nativeAppLink'
-                        show={this.props.appDownloadLink && !UserAgent.isMobileApp()}
-                        url={safeAppDownloadLink}
-                        text={formatMessage({id: 'navbar_dropdown.nativeApps', defaultMessage: 'Download Apps'})}
-                        icon={<i className='fa fa-mobile'/>}
-                    />
+                    <TeamPermissionGate
+                        teamId={teamId}
+                        permissions={[Permissions.SYSCONSOLE_WRITE_PLUGINS]}
+                    >
+                        <Menu.ItemExternalLink
+                            id='nativeAppLink'
+                            show={this.props.appDownloadLink && !UserAgent.isMobileApp()}
+                            url={safeAppDownloadLink}
+                            text={formatMessage({id: 'navbar_dropdown.nativeApps', defaultMessage: 'Download Apps'})}
+                            icon={<i className='fa fa-mobile'/>}
+                        />
+                    </TeamPermissionGate>
                     <Menu.ItemToggleModalRedux
                         id='about'
                         modalId={ModalIdentifiers.ABOUT}
