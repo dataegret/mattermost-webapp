@@ -255,9 +255,8 @@ export class MainMenu extends React.PureComponent<Props> {
                     </TeamPermissionGate>
                 </Menu.Group>
                 <Menu.Group>
-                    <TeamPermissionGate
-                        teamId={teamId}
-                        permissions={[Permissions.MANAGE_TEAM]}
+                    <SystemPermissionGate
+                        permissions={[Permissions.MANAGE_SYSTEM]}
                     >
                         <Menu.ItemToggleModalRedux
                             id='teamSettings'
@@ -266,7 +265,7 @@ export class MainMenu extends React.PureComponent<Props> {
                             text={formatMessage({id: 'navbar_dropdown.teamSettings', defaultMessage: 'Team Settings'})}
                             icon={<i className='fa fa-globe'/>}
                         />
-                    </TeamPermissionGate>
+                    </SystemPermissionGate>
                     <TeamPermissionGate
                         teamId={teamId}
                         permissions={[Permissions.MANAGE_TEAM]}
@@ -414,9 +413,8 @@ export class MainMenu extends React.PureComponent<Props> {
                     >
                         {invitePeopleModal}
                     </TeamPermissionGate>
-                    <TeamPermissionGate
-                        teamId={teamId}
-                        permissions={[Permissions.MANAGE_TEAM]}
+                    <SystemPermissionGate
+                        permissions={[Permissions.MANAGE_SYSTEM]}
                     >
                         <Menu.ItemToggleModalRedux
                             id='teamSettings'
@@ -424,7 +422,7 @@ export class MainMenu extends React.PureComponent<Props> {
                             dialogType={TeamSettingsModal}
                             text={formatMessage({id: 'navbar_dropdown.teamSettings', defaultMessage: 'Team Settings'})}
                         />
-                    </TeamPermissionGate>
+                    </SystemPermissionGate>
                     <TeamPermissionGate
                         teamId={teamId}
                         permissions={[Permissions.MANAGE_TEAM]}
