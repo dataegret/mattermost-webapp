@@ -48,6 +48,7 @@ type Props = {
     isKeyBoardShortcutModalOpen: boolean;
     userGroupsEnabled: boolean;
     canCreateCustomGroups: boolean;
+    canInvitePeople: boolean;
 };
 
 type State = {
@@ -242,6 +243,7 @@ export default class Sidebar extends React.PureComponent<Props, State> {
                         unreadFilterEnabled={this.props.unreadFilterEnabled}
                         userGroupsEnabled={this.props.userGroupsEnabled}
                         canCreateCustomGroups={this.props.canCreateCustomGroups}
+                        canInvitePeople={this.props.canInvitePeople}
                     />
                 )}
                 <div

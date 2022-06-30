@@ -28,6 +28,7 @@ type Props = {
     isAddChannelOpen: boolean;
     openAddChannelOpen: (open: boolean) => void;
     canCreateCustomGroups: boolean;
+    canInvitePeople: boolean;
 };
 
 const AddChannelDropdown = ({
@@ -45,11 +46,12 @@ const AddChannelDropdown = ({
     isAddChannelOpen,
     openAddChannelOpen,
     canCreateCustomGroups,
+    canInvitePeople,
 }: Props) => {
     const intl = useIntl();
 
     const renderDropdownItems = () => {
-        const invitePeople = (
+        const invitePeople = !canInvitePeople ? '' : (
             <Menu.Group>
                 <Menu.ItemAction
                     id='invitePeople'
