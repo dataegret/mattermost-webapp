@@ -9,7 +9,7 @@ import {Preferences} from 'mattermost-redux/constants';
 import Permissions from 'mattermost-redux/constants/permissions';
 import {getLicense} from 'mattermost-redux/selectors/entities/general';
 import {getBool, isCustomGroupsEnabled} from 'mattermost-redux/selectors/entities/preferences';
-import {haveICurrentChannelPermission, haveISystemPermission} from 'mattermost-redux/selectors/entities/roles';
+import {haveICurrentChannelPermission, haveICurrentTeamPermission, haveISystemPermission} from 'mattermost-redux/selectors/entities/roles';
 import {getCurrentTeam} from 'mattermost-redux/selectors/entities/teams';
 import {GenericAction} from 'mattermost-redux/types/actions';
 import {createCategory, clearChannelSelection} from 'actions/views/channel_sidebar';
@@ -32,11 +32,13 @@ function mapStateToProps(state: GlobalState) {
     let canCreatePublicChannel = false;
     let canCreatePrivateChannel = false;
     let canJoinPublicChannel = false;
+    let canInvitePeople = false;
 
     if (currentTeam) {
         canCreatePublicChannel = haveICurrentChannelPermission(state, Permissions.CREATE_PUBLIC_CHANNEL);
         canCreatePrivateChannel = haveICurrentChannelPermission(state, Permissions.CREATE_PRIVATE_CHANNEL);
         canJoinPublicChannel = haveICurrentChannelPermission(state, Permissions.JOIN_PUBLIC_CHANNELS);
+        canInvitePeople = haveICurrentTeamPermission(state, Permissions.ADD_USER_TO_TEAM);
     }
 
     const canCreateCustomGroups = haveISystemPermission(state, {permission: Permissions.CREATE_CUSTOM_GROUP}) && isCustomGroupsEnabled(state);
@@ -59,6 +61,7 @@ function mapStateToProps(state: GlobalState) {
         isKeyBoardShortcutModalOpen: isModalOpen(state, ModalIdentifiers.KEYBOARD_SHORTCUTS_MODAL),
         userGroupsEnabled,
         canCreateCustomGroups,
+        canInvitePeople,
     };
 }
 
