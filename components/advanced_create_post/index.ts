@@ -23,7 +23,7 @@ import {getCurrentTeamId} from 'mattermost-redux/selectors/entities/teams';
 
 import {getCurrentChannel, getCurrentChannelStats, getChannelMemberCountsByGroup as selectChannelMemberCountsByGroup} from 'mattermost-redux/selectors/entities/channels';
 import {getCurrentUserId, getStatusForUserId, getUser} from 'mattermost-redux/selectors/entities/users';
-import {haveICurrentChannelPermission} from 'mattermost-redux/selectors/entities/roles';
+import {haveICurrentChannelPermission, haveISystemPermission} from 'mattermost-redux/selectors/entities/roles';
 import {getChannelTimezones, getChannelMemberCountsByGroup} from 'mattermost-redux/actions/channels';
 import {get, getInt, getBool, isCustomGroupsEnabled} from 'mattermost-redux/selectors/entities/preferences';
 import {PreferenceType} from '@mattermost/types/preferences';
@@ -81,7 +81,8 @@ function makeMapStateToProps() {
         const badConnection = connectionErrorCount(state) > 1;
         const isTimezoneEnabled = config.ExperimentalTimezone === 'true';
         const shortcutReactToLastPostEmittedFrom = getShortcutReactToLastPostEmittedFrom(state);
-        const canPost = haveICurrentChannelPermission(state, Permissions.CREATE_POST);
+        const canPost = haveICurrentChannelPermission(state, Permissions.CREATE_POST) &&
+            (currentChannel.name !== 'town-square' || haveISystemPermission(state, {permission: Permissions.MANAGE_SYSTEM}));
         const useChannelMentions = haveICurrentChannelPermission(state, Permissions.USE_CHANNEL_MENTIONS);
         const isLDAPEnabled = license?.IsLicensed === 'true' && license?.LDAPGroups === 'true';
         const useCustomGroupMentions = isCustomGroupsEnabled(state) && haveICurrentChannelPermission(state, Permissions.USE_GROUP_MENTIONS);

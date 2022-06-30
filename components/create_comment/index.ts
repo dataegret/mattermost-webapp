@@ -13,7 +13,7 @@ import {ModalData} from 'types/actions.js';
 import {ActionFunc, ActionResult, DispatchFunc} from 'mattermost-redux/types/actions.js';
 
 import {getConfig, getLicense} from 'mattermost-redux/selectors/entities/general';
-import {haveIChannelPermission} from 'mattermost-redux/selectors/entities/roles';
+import {haveIChannelPermission, haveISystemPermission} from 'mattermost-redux/selectors/entities/roles';
 import {getBool, isCustomGroupsEnabled} from 'mattermost-redux/selectors/entities/preferences';
 import {getAllChannelStats, getChannelMemberCountsByGroup as selectChannelMemberCountsByGroup} from 'mattermost-redux/selectors/entities/channels';
 import {makeGetMessageInHistoryItem} from 'mattermost-redux/selectors/entities/posts';
@@ -69,7 +69,8 @@ function makeMapStateToProps() {
         const enableGifPicker = config.EnableGifPicker === 'true';
         const badConnection = connectionErrorCount(state) > 1;
         const isTimezoneEnabled = config.ExperimentalTimezone === 'true';
-        const canPost = haveIChannelPermission(state, channel.team_id, channel.id, Permissions.CREATE_POST);
+        const canPost = haveIChannelPermission(state, channel.team_id, channel.id, Permissions.CREATE_POST) &&
+            (channel.name !== 'town-square' || haveISystemPermission(state, {permission: Permissions.MANAGE_SYSTEM}));
         const useChannelMentions = haveIChannelPermission(state, channel.team_id, channel.id, Permissions.USE_CHANNEL_MENTIONS);
         const isLDAPEnabled = license?.IsLicensed === 'true' && license?.LDAPGroups === 'true';
         const useCustomGroupMentions = isCustomGroupsEnabled(state) && haveIChannelPermission(state, channel.team_id, channel.id, Permissions.USE_GROUP_MENTIONS);
