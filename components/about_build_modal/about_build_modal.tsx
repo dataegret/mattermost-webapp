@@ -177,6 +177,34 @@ export default class AboutBuildModal extends React.PureComponent<Props, State> {
             </a>
         );
 
+        const website = (
+            <a
+                target='_blank'
+                id='websiteLink'
+                rel='noopener noreferrer'
+                href='https://dataegret.ru/'
+            >
+                <FormattedMessage
+                    id='about.website'
+                    defaultMessage='Website'
+                />
+            </a>
+        );
+
+        const support = (
+            <a
+                target='_blank'
+                id='supportLink'
+                rel='noopener noreferrer'
+                href='mailto:online-support@dataegret.ru'
+            >
+                <FormattedMessage
+                    id='about.support'
+                    defaultMessage='Support'
+                />
+            </a>
+        );
+
         // Only show build number if it's a number (so only builds from Jenkins)
         let buildnumber: JSX.Element | null = (
             <div>
@@ -227,31 +255,6 @@ export default class AboutBuildModal extends React.PureComponent<Props, State> {
                                 <strong>{'Mattermost'} {title}</strong>
                             </h3>
                             <p className='about-modal__subtitle pb-2'>{subTitle}</p>
-                            <div className='form-group less'>
-                                <div>
-                                    <FormattedMessage
-                                        id='about.version'
-                                        defaultMessage='Mattermost Version:'
-                                    />
-                                    <span id='versionString'>{'\u00a0' + mmversion}</span>
-                                </div>
-                                <div>
-                                    <FormattedMessage
-                                        id='about.dbversion'
-                                        defaultMessage='Database Schema Version:'
-                                    />
-                                    <span id='dbversionString'>{'\u00a0' + config.SchemaVersion}</span>
-                                </div>
-                                {buildnumber}
-                                <div>
-                                    <FormattedMessage
-                                        id='about.database'
-                                        defaultMessage='Database:'
-                                    />
-                                    {'\u00a0' + config.SQLDriverName}
-                                </div>
-                            </div>
-                            {licensee}
                         </div>
                     </div>
                     <div className='about-modal__footer'>
@@ -270,6 +273,10 @@ export default class AboutBuildModal extends React.PureComponent<Props, State> {
                                 {termsOfService}
                                 {' - '}
                                 {privacyPolicy}
+                                {' - '}
+                                {website}
+                                {' - '}
+                                {support}
                             </div>
                         </div>
                     </div>
@@ -308,34 +315,6 @@ export default class AboutBuildModal extends React.PureComponent<Props, State> {
                                     ),
                                 }}
                             />
-                        </p>
-                    </div>
-                    <div className='about-modal__hash'>
-                        <p>
-                            <FormattedMessage
-                                id='about.hash'
-                                defaultMessage='Build Hash:'
-                            />
-                            <Nbsp/>{config.BuildHash}
-                            <br/>
-                            <FormattedMessage
-                                id='about.hashee'
-                                defaultMessage='EE Build Hash:'
-                            />
-                            <Nbsp/>{config.BuildHashEnterprise}
-                            <br/>
-                            <FormattedMessage
-                                id='about.hashwebapp'
-                                defaultMessage='Webapp Build Hash:'
-                            />
-                            <Nbsp/>{/* global COMMIT_HASH */ this.props.webappBuildHash || (typeof COMMIT_HASH === 'undefined' ? '' : COMMIT_HASH)}
-                        </p>
-                        <p>
-                            <FormattedMessage
-                                id='about.date'
-                                defaultMessage='Build Date:'
-                            />
-                            <Nbsp/>{config.BuildDate}
                         </p>
                     </div>
                 </Modal.Body>
