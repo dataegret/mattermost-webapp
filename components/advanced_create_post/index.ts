@@ -26,6 +26,7 @@ import {getCurrentUserId, getStatusForUserId, getUser} from 'mattermost-redux/se
 import {haveICurrentChannelPermission} from 'mattermost-redux/selectors/entities/roles';
 import {getChannelTimezones, getChannelMemberCountsByGroup} from 'mattermost-redux/actions/channels';
 import {get, getInt, getBool, isCustomGroupsEnabled} from 'mattermost-redux/selectors/entities/preferences';
+import {getCurrentTeam} from 'mattermost-redux/selectors/entities/teams';
 import {PreferenceType} from '@mattermost/types/preferences';
 import {savePreferences} from 'mattermost-redux/actions/preferences';
 import {
@@ -94,6 +95,8 @@ function makeMapStateToProps() {
         const showSendTutorialTip = enableTutorial && tutorialStep === OnboardingTourSteps.SEND_MESSAGE;
         const isFormattingBarHidden = getBool(state, Preferences.ADVANCED_TEXT_EDITOR, AdvancedTextEditor.POST);
 
+        let curTeamName = getCurrentTeam(state).display_name;
+
         return {
             currentTeamId,
             currentChannel,
@@ -114,7 +117,7 @@ function makeMapStateToProps() {
             enableEmojiPicker,
             enableGifPicker,
             enableConfirmNotificationsToChannel,
-            maxPostSize: parseInt(config.MaxPostSize || '', 10) || Constants.DEFAULT_CHARACTER_LIMIT,
+            maxPostSize: curTeamName === "DBA" || curTeamName === "Sale" || curTeamName === "Tech" ? 3500 : parseInt(config.MaxPostSize || '', 10) || Constants.DEFAULT_CHARACTER_LIMIT,
             userIsOutOfOffice,
             rhsExpanded: getIsRhsExpanded(state),
             emojiMap: getEmojiMap(state),

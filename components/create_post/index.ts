@@ -19,7 +19,7 @@ import {PostDraft} from 'types/store/rhs.js';
 import {ModalData} from 'types/actions.js';
 
 import {getConfig, getLicense} from 'mattermost-redux/selectors/entities/general';
-import {getCurrentTeamId} from 'mattermost-redux/selectors/entities/teams';
+import {getCurrentTeamId,getCurrentTeam} from 'mattermost-redux/selectors/entities/teams';
 
 import {getCurrentChannel, getCurrentChannelStats, getChannelMemberCountsByGroup as selectChannelMemberCountsByGroup} from 'mattermost-redux/selectors/entities/channels';
 import {getCurrentUserId, getStatusForUserId, getUser} from 'mattermost-redux/selectors/entities/users';
@@ -94,6 +94,8 @@ function makeMapStateToProps() {
         const tutorialStep = getInt(state, TutorialTourName.ONBOARDING_TUTORIAL_STEP, currentUserId, 0);
         const showSendTutorialTip = enableTutorial && tutorialStep === OnboardingTourSteps.SEND_MESSAGE;
 
+        let curTeamName = getCurrentTeam(state).display_name;
+
         return {
             currentTeamId,
             currentChannel,
@@ -113,7 +115,7 @@ function makeMapStateToProps() {
             enableEmojiPicker,
             enableGifPicker,
             enableConfirmNotificationsToChannel,
-            maxPostSize: parseInt(config.MaxPostSize || '', 10) || Constants.DEFAULT_CHARACTER_LIMIT,
+            maxPostSize: curTeamName === "DBA" || curTeamName === "Sale" || curTeamName === "Tech" ? 3500 : parseInt(config.MaxPostSize || '', 10) || Constants.DEFAULT_CHARACTER_LIMIT,
             userIsOutOfOffice,
             rhsExpanded: getIsRhsExpanded(state),
             emojiMap: getEmojiMap(state),
