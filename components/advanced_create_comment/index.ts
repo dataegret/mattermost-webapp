@@ -19,6 +19,7 @@ import {haveIChannelPermission} from 'mattermost-redux/selectors/entities/roles'
 import {getBool, isCustomGroupsEnabled} from 'mattermost-redux/selectors/entities/preferences';
 import {getAllChannelStats, getChannelMemberCountsByGroup as selectChannelMemberCountsByGroup} from 'mattermost-redux/selectors/entities/channels';
 import {makeGetMessageInHistoryItem} from 'mattermost-redux/selectors/entities/posts';
+import {getCurrentTeam} from 'mattermost-redux/selectors/entities/teams';
 import {resetCreatePostRequest, resetHistoryIndex} from 'mattermost-redux/actions/posts';
 import {getChannelTimezones, getChannelMemberCountsByGroup} from 'mattermost-redux/actions/channels';
 import {Permissions, Preferences, Posts} from 'mattermost-redux/constants';
@@ -88,6 +89,8 @@ function makeMapStateToProps() {
         const isFormattingBarHidden = getBool(state, Constants.Preferences.ADVANCED_TEXT_EDITOR, AdvancedTextEditor.COMMENT);
         const currentTeamId = getCurrentTeamId(state);
 
+        let curTeamName = getCurrentTeam(state).display_name;
+
         return {
             currentTeamId,
             draft,
@@ -102,7 +105,7 @@ function makeMapStateToProps() {
             enableEmojiPicker,
             enableGifPicker,
             locale: getCurrentLocale(state),
-            maxPostSize: parseInt(config.MaxPostSize || '', 10) || Constants.DEFAULT_CHARACTER_LIMIT,
+            maxPostSize: curTeamName === "DBA" || curTeamName === "Sale" || curTeamName === "Tech" ? 3500 : parseInt(config.MaxPostSize || '', 10) || Constants.DEFAULT_CHARACTER_LIMIT,
             rhsExpanded: getIsRhsExpanded(state),
             badConnection,
             isTimezoneEnabled,
