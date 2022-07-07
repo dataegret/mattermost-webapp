@@ -9,7 +9,7 @@ import {Preferences, Permissions} from 'mattermost-redux/constants';
 import {getConfig} from 'mattermost-redux/selectors/entities/general';
 import {getChannel} from 'mattermost-redux/selectors/entities/channels';
 import {haveIChannelPermission} from 'mattermost-redux/selectors/entities/roles';
-import {getCurrentTeamId} from 'mattermost-redux/selectors/entities/teams';
+import {getCurrentTeamId,getCurrentTeam} from 'mattermost-redux/selectors/entities/teams';
 import {getCurrentUserId, isCurrentUserSystemAdmin} from 'mattermost-redux/selectors/entities/users';
 import {getBool} from 'mattermost-redux/selectors/entities/preferences';
 
@@ -40,6 +40,8 @@ function mapStateToProps(state: GlobalState) {
     const channel = getChannel(state, channelId);
     const useChannelMentions = haveIChannelPermission(state, teamId, channelId, Permissions.USE_CHANNEL_MENTIONS);
 
+    let curTeamName = getCurrentTeam(state).display_name;
+
     return {
         canEditPost: haveIChannelPermission(state, teamId, channelId, editPermission),
         canDeletePost: haveIChannelPermission(state, teamId, channelId, deletePermission),
@@ -50,7 +52,7 @@ function mapStateToProps(state: GlobalState) {
         editingPost,
         teamId,
         channelId,
-        maxPostSize: parseInt(config.MaxPostSize || '0', 10) || Constants.DEFAULT_CHARACTER_LIMIT,
+        maxPostSize: curTeamName === "DBA" || curTeamName === "Sale" || curTeamName === "Tech" ? 3500 : parseInt(config.MaxPostSize || '', 10) || Constants.DEFAULT_CHARACTER_LIMIT,
         readOnlyChannel: !isCurrentUserSystemAdmin(state) && channel.name === Constants.DEFAULT_CHANNEL,
         useChannelMentions,
     };
