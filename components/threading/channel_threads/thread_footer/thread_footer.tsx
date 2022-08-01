@@ -138,7 +138,7 @@ function ThreadFooter({
                     {...THREADING_TIME}
                 >
                     {({formatted}) => (
-                        <span className='Timestamp separated alt-visible'>
+                        <span className='Timestamp separated'>
                             <FormattedMessage
                                 id='threading.footer.lastReplyAt'
                                 defaultMessage='Last reply {formatted}'
