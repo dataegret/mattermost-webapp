@@ -466,7 +466,7 @@ export class DotMenuClass extends React.PureComponent<Props, State> {
             </span>
         );
 
-        this.canPostBeForwarded = !(isSystemMessage);
+        this.canPostBeForwarded = false;
 
         const forwardPostItemText = (
             <span className={'title-with-new-badge'}>
