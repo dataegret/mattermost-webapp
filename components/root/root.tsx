@@ -44,6 +44,7 @@ import {initializePlugins} from 'plugins';
 import Pluggable from 'plugins/pluggable';
 
 import BrowserStore from 'stores/browser_store';
+import {LandingPreferenceTypes} from 'utils/constants';
 
 import Constants, {StoragePrefixes, WindowSizes} from 'utils/constants';
 import {EmojiIndicesByAlias} from 'utils/emoji';
@@ -320,7 +321,11 @@ export default class Root extends React.PureComponent<Props, State> {
             landing = desktopAppDownloadLink;
         }
 
-        if (landing && !this.props.isCloud && !BrowserStore.hasSeenLandingPage() && !toResetPasswordScreen && !this.props.location.pathname.includes('/landing') && !window.location.hostname?.endsWith('.test.mattermost.com') && !UserAgent.isDesktopApp() && !UserAgent.isChromebook()) {
+        const siteUrl = getConfig(store.getState()).SiteURL;
+        const landingPreference = BrowserStore.getLandingPreference(siteUrl);
+        const isLandingPreferenceApp = landingPreference && landingPreference === LandingPreferenceTypes.MATTERMOSTAPP;
+
+        if (landing && !this.props.isCloud && (!BrowserStore.hasSeenLandingPage() || isLandingPreferenceApp) && !toResetPasswordScreen && !this.props.location.pathname.includes('/landing') && !window.location.hostname?.endsWith('.test.mattermost.com') && !UserAgent.isDesktopApp() && !UserAgent.isChromebook()) {
             this.props.history.push('/landing#' + this.props.location.pathname + this.props.location.search);
             BrowserStore.setLandingPageSeen(true);
         }
